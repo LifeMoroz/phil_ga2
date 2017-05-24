@@ -42,20 +42,20 @@ def mutate(self):
     if random.random() < 0.2:
         new = NN()
         for i in range(size()):
-            if random.random() < 0.1:
+            if random.random() < 0.3:
                 new.hidden_weights[i] = self.hidden_weights[i]
         return new
 
 
 def iterate():
-    for i in range(P_SIZE):
+    for i in range(len(_arr)):
         mutated = mutate(_arr[i])
         if mutated:
             _arr.append(mutated)
 
-    print(len(_arr))
-    for i in range(len(_arr)):
-        for j in range(P_SIZE):
+    ssize = len(_arr)
+    for i in range(ssize):
+        for j in range(ssize):
             if i != j:
                 _arr.append(cross(_arr[i], _arr[j]))
     res = []
@@ -71,6 +71,6 @@ ITERS = 10
 
 for _ in range(ITERS):
     _arr, _error = iterate()
-    _arr = _arr[:P_SIZE - 2]
+    _arr = _arr[:P_SIZE]
     _arr.extend([NN(), NN()])
     print(_error)
